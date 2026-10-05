@@ -18,6 +18,7 @@ androidxRoom = "2.8.5"
 androidxSqlite = "2.7.1"
 androidxPaging = "3.5.1"
 coil = "3.6.3"
+androidxNavigation3 = "1.2.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -61,6 +62,9 @@ androidx-paging-compose = { group = "androidx.paging", name = "paging-compose", 
 androidx-paging-testing = { group = "androidx.paging", name = "paging-testing", version.ref = "androidxPaging" }
 koin-androidx-compose = { group = "io.insert-koin", name = "koin-androidx-compose" }
 androidx-compose-material-icons-core = { group = "androidx.compose.material", name = "material-icons-core" }
+androidx-navigation3-runtime = { group = "androidx.navigation3", name = "navigation3-runtime", version.ref = "androidxNavigation3" }
+androidx-navigation3-ui = { group = "androidx.navigation3", name = "navigation3-ui", version.ref = "androidxNavigation3" }
+androidx-lifecycle-viewmodel-navigation3 = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-navigation3", version.ref = "androidxLifecycle" }
 
 # Used by build-logic
 android-gradle-plugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
