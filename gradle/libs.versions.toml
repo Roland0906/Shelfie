@@ -17,6 +17,7 @@ ksp = "2.3.12"
 androidxRoom = "2.8.5"
 androidxSqlite = "2.7.1"
 androidxPaging = "3.5.1"
+coil = "3.6.3"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -51,6 +52,8 @@ androidx-room-compiler = { group = "androidx.room", name = "room-compiler", vers
 androidx-sqlite-bundled = { group = "androidx.sqlite", name = "sqlite-bundled", version.ref = "androidxSqlite" }
 androidx-paging-common = { group = "androidx.paging", name = "paging-common", version.ref = "androidxPaging" }
 koin-android = { group = "io.insert-koin", name = "koin-android" }
+coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
+coil-network-okhttp = { group = "io.coil-kt.coil3", name = "coil-network-okhttp", version.ref = "coil" }
 
 # Used by build-logic
 android-gradle-plugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
