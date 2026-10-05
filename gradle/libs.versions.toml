@@ -60,6 +60,7 @@ androidx-lifecycle-viewmodel-savedstate = { group = "androidx.lifecycle", name =
 androidx-paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "androidxPaging" }
 androidx-paging-testing = { group = "androidx.paging", name = "paging-testing", version.ref = "androidxPaging" }
 koin-androidx-compose = { group = "io.insert-koin", name = "koin-androidx-compose" }
+androidx-compose-material-icons-core = { group = "androidx.compose.material", name = "material-icons-core" }
 
 # Used by build-logic
 android-gradle-plugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
