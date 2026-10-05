@@ -24,6 +24,9 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Shelfie"
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 include(":app")
 include(":core:model")
 include(":core:common")
+include(":core:network")
