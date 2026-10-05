@@ -8,6 +8,8 @@ dependencies {
     compileOnly(libs.android.gradle.plugin)
     compileOnly(libs.kotlin.gradle.plugin)
     compileOnly(libs.compose.gradle.plugin)
+    compileOnly(libs.ksp.gradle.plugin)
+    compileOnly(libs.room.gradle.plugin)
 }
 
 gradlePlugin {
@@ -23,6 +25,10 @@ gradlePlugin {
         register("androidCompose") {
             id = "shelfie.android.compose"
             implementationClass = "AndroidComposeConventionPlugin"
+        }
+        register("androidRoom") {
+            id = "shelfie.android.room"
+            implementationClass = "AndroidRoomConventionPlugin"
         }
         register("jvmLibrary") {
             id = "shelfie.jvm.library"
