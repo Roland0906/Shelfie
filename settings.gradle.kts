@@ -25,3 +25,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "Shelfie"
 include(":app")
+include(":core:model")
+include(":core:common")
