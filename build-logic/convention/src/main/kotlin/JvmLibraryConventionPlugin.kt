@@ -1,5 +1,6 @@
 import com.rolandlin.shelfie.buildlogic.SHELFIE_JAVA_VERSION
 import com.rolandlin.shelfie.buildlogic.configureKotlinCompile
+import com.rolandlin.shelfie.buildlogic.enforceModuleRules
 import com.rolandlin.shelfie.buildlogic.lib
 import com.rolandlin.shelfie.buildlogic.libs
 import org.gradle.api.Plugin
@@ -21,6 +22,7 @@ class JvmLibraryConventionPlugin : Plugin<Project> {
             targetCompatibility = SHELFIE_JAVA_VERSION
         }
         configureKotlinCompile()
+        enforceModuleRules()
 
         dependencies {
             add("testImplementation", libs.lib("junit"))

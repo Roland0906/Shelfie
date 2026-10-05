@@ -2,6 +2,7 @@ import com.android.build.api.dsl.LibraryExtension
 import com.rolandlin.shelfie.buildlogic.SHELFIE_JAVA_VERSION
 import com.rolandlin.shelfie.buildlogic.ShelfieSdk
 import com.rolandlin.shelfie.buildlogic.configureKotlinCompile
+import com.rolandlin.shelfie.buildlogic.enforceModuleRules
 import com.rolandlin.shelfie.buildlogic.lib
 import com.rolandlin.shelfie.buildlogic.libs
 import org.gradle.api.Plugin
@@ -28,6 +29,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
             testOptions.unitTests.isReturnDefaultValues = true
         }
         configureKotlinCompile()
+        enforceModuleRules()
 
         dependencies {
             add("testImplementation", libs.lib("junit"))
