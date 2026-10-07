@@ -1,0 +1,10 @@
+<resources>
+    <string name="detail_back">Back</string>
+    <string name="detail_refresh">Refresh</string>
+    <string name="detail_retry">Retry</string>
+    <string name="detail_no_description">No description available.</string>
+    <string name="detail_remove_from_shelf">Remove from shelf</string>
+    <string name="shelf_status_want_to_read">Want to read</string>
+    <string name="shelf_status_reading">Reading</string>
+    <string name="shelf_status_finished">Finished</string>
+</resources>

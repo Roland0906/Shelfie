@@ -26,6 +26,10 @@ gradlePlugin {
             id = "shelfie.android.compose"
             implementationClass = "AndroidComposeConventionPlugin"
         }
+        register("androidFeature") {
+            id = "shelfie.android.feature"
+            implementationClass = "AndroidFeatureConventionPlugin"
+        }
         register("androidRoom") {
             id = "shelfie.android.room"
             implementationClass = "AndroidRoomConventionPlugin"

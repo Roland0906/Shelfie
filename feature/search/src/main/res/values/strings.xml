@@ -1,0 +1,8 @@
+<resources>
+    <string name="search_hint">Search books, authors…</string>
+    <string name="search_idle">Find your next book</string>
+    <string name="search_empty_title">No books found</string>
+    <string name="search_empty_body">Nothing matched “%1$s”. Try a different title or author.</string>
+    <string name="search_retry">Retry</string>
+    <string name="search_load_more_failed">Couldn\'t load more. Tap to retry.</string>
+</resources>
