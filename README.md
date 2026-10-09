@@ -8,6 +8,12 @@ Shelfie is a portfolio project. It has few features on purpose: each one exists 
 
 > **Status:** early. Search, book detail and the shelf work end to end. See [Roadmap](#roadmap).
 
+<p align="center">
+  <img src="docs/screenshots/search.png" width="250" alt="Search results for dune">
+  <img src="docs/screenshots/detail.png" width="250" alt="Book detail with reading progress">
+  <img src="docs/screenshots/shelf.png" width="250" alt="Shelf with status and progress">
+</p>
+
 ## Features
 
 **Search**
