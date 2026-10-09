@@ -78,6 +78,8 @@ These rules live in [`build-logic`](build-logic/convention/src/main/kotlin/com/r
 
 ### Notable decisions
 
+Longer write-ups, with the alternatives that were considered, are in [`docs/adr`](docs/adr).
+
 | Topic | Decision |
 |---|---|
 | Single source of truth | Repositories expose `Flow`s from Room. Network results reach the UI only after they are written to the database. |
