@@ -28,7 +28,8 @@ interface SearchDao {
     @Upsert
     suspend fun upsertQuery(query: SearchQueryEntity)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    /** Ignores books already listed under the query; the gaps they leave in position are harmless. */
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertResults(results: List<SearchResultEntity>)
 
     @Query("DELETE FROM search_results WHERE `query` = :query")

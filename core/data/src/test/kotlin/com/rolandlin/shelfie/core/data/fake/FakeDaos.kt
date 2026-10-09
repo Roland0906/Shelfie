@@ -63,9 +63,12 @@ class FakeSearchDao : SearchDao {
     override suspend fun findAnyResult(workId: String) = results.value.firstOrNull { it.workId == workId }
     override suspend fun maxPosition(query: String) = resultsFor(query).maxOfOrNull { it.position }
     override suspend fun upsertQuery(query: SearchQueryEntity) = queries.update { it + (query.query to query) }
+    /** Mirrors INSERT OR IGNORE against both the primary key and the unique (query, workId) index. */
     override suspend fun insertResults(results: List<SearchResultEntity>) = this.results.update { current ->
-        val keys = results.map { it.query to it.position }.toSet()
-        current.filterNot { (it.query to it.position) in keys } + results
+        results.fold(current) { acc, row ->
+            val conflict = acc.any { it.query == row.query && (it.position == row.position || it.workId == row.workId) }
+            if (conflict) acc else acc + row
+        }
     }
     override suspend fun deleteResults(query: String) = results.update { list -> list.filterNot { it.query == query } }
 

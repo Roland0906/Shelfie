@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "4863aa346da9e6ea037052893d490f88",
+    "identityHash": "04e99666bcdd200a3d65a1d9becd23c2",
     "entities": [
       {
         "tableName": "books",
@@ -172,7 +172,19 @@
             "query",
             "position"
           ]
-        }
+        },
+        "indices": [
+          {
+            "name": "index_search_results_query_workId",
+            "unique": true,
+            "columnNames": [
+              "query",
+              "workId"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_search_results_query_workId` ON `${TABLE_NAME}` (`query`, `workId`)"
+          }
+        ]
       },
       {
         "tableName": "search_queries",
@@ -281,7 +293,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4863aa346da9e6ea037052893d490f88')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '04e99666bcdd200a3d65a1d9becd23c2')"
     ]
   }
 }

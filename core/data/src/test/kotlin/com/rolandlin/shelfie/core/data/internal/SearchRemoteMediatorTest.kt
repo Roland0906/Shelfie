@@ -77,6 +77,18 @@ class SearchRemoteMediatorTest {
     }
 
     @Test
+    fun `a book repeated on a later page is listed once`() = runTest {
+        val mediator = mediator()
+        mediator.load(LoadType.REFRESH, emptyState)
+        // The ranking shifts between requests, so page 2 repeats W2 from page 1
+        api.searchResults["dune"] = listOf(doc("W1", "Dune"), doc("W0", "New"), doc("W2", "Dune Messiah"), doc("W3", "Children of Dune"))
+
+        mediator.load(LoadType.APPEND, emptyState)
+
+        assertEquals(listOf("W1", "W2", "W3"), dao.resultsFor("dune").map { it.workId })
+    }
+
+    @Test
     fun `refresh replaces stale results for the query`() = runTest {
         val mediator = mediator()
         mediator.load(LoadType.REFRESH, emptyState)
