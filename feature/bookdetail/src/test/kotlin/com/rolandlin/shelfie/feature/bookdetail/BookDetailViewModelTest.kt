@@ -127,4 +127,19 @@ class BookDetailViewModelTest {
         viewModel.removeFromShelf()
         assertNull(assertIs<BookDetailUiState.Content>(viewModel.uiState.value).shelfEntry)
     }
+
+    @Test
+    fun `progress updates the entry and reaching 100 finishes the book`() = runTest {
+        bookRepo.setBook(dune)
+        val viewModel = viewModel()
+        viewModel.setShelfStatus(ShelfStatus.WantToRead)
+
+        viewModel.setProgress(40)
+        val reading = assertIs<BookDetailUiState.Content>(viewModel.uiState.value).shelfEntry
+        assertEquals(40, reading?.progressPercent)
+        assertEquals(ShelfStatus.Reading, reading?.status)
+
+        viewModel.setProgress(100)
+        assertEquals(ShelfStatus.Finished, assertIs<BookDetailUiState.Content>(viewModel.uiState.value).shelfEntry?.status)
+    }
 }
