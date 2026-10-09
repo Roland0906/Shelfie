@@ -1,5 +1,7 @@
 # Shelfie
 
+[![CI](https://github.com/Roland0906/Shelfie/actions/workflows/ci.yml/badge.svg)](https://github.com/Roland0906/Shelfie/actions/workflows/ci.yml)
+
 An offline-first Android app for finding books and keeping a personal reading shelf, built on the [Open Library](https://openlibrary.org/developers/api) API.
 
 Shelfie is a portfolio project. It has few features on purpose: each one exists to show a design decision that I can explain, such as how the cache stays correct, how errors reach the UI, and how modules are kept apart.
@@ -125,7 +127,8 @@ The project uses fakes instead of mocking libraries, so tests check the state th
 - [ ] Discover screen, adaptive multi-pane layouts, Baseline Profile and Macrobenchmark
 - [ ] Kotlin Multiplatform: shared data layer and an iOS app
 - [ ] On-device AI reading summaries with a cloud fallback
-- [ ] CI and architecture decision records
+- [x] CI
+- [ ] Architecture decision records
 
 ## Known limitations
 
