@@ -33,6 +33,7 @@ import com.rolandlin.shelfie.core.designsystem.component.CoverSize
 import com.rolandlin.shelfie.core.designsystem.component.LoadingState
 import com.rolandlin.shelfie.core.designsystem.component.MessageState
 import com.rolandlin.shelfie.core.designsystem.component.StatusBanner
+import com.rolandlin.shelfie.core.designsystem.component.label
 import com.rolandlin.shelfie.core.designsystem.component.message
 import com.rolandlin.shelfie.core.model.Book
 import com.rolandlin.shelfie.core.model.ShelfEntry
@@ -169,7 +170,7 @@ private fun ShelfSection(
                 FilterChip(
                     selected = shelfEntry?.status == status,
                     onClick = { onStatusSelected(status) },
-                    label = { Text(stringResource(status.labelRes)) },
+                    label = { Text(status.label()) },
                 )
             }
         }
@@ -178,10 +179,3 @@ private fun ShelfSection(
         }
     }
 }
-
-private val ShelfStatus.labelRes: Int
-    get() = when (this) {
-        ShelfStatus.WantToRead -> R.string.shelf_status_want_to_read
-        ShelfStatus.Reading -> R.string.shelf_status_reading
-        ShelfStatus.Finished -> R.string.shelf_status_finished
-    }
