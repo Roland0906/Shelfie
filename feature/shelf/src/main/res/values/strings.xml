@@ -1,0 +1,9 @@
+<resources>
+    <string name="shelf_filter_all">All</string>
+    <string name="shelf_empty_title">Your shelf is empty</string>
+    <string name="shelf_empty_body">Search for a book and add it to your shelf.</string>
+    <string name="shelf_empty_filtered_title">Nothing here yet</string>
+    <string name="shelf_empty_filtered_body">No books are marked “%1$s”.</string>
+    <string name="shelf_untitled">Untitled</string>
+    <string name="shelf_progress">%1$d%%</string>
+</resources>

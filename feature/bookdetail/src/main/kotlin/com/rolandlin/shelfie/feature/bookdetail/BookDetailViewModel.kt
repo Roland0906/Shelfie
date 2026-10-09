@@ -54,6 +54,11 @@ class BookDetailViewModel(
         viewModelScope.launch { shelfRepo.upsert(workId, status) }
     }
 
+    /** Status follows progress (100% finishes the book); ShelfEntry owns that rule. */
+    fun setProgress(percent: Int) {
+        viewModelScope.launch { shelfRepo.updateProgress(workId, percent) }
+    }
+
     fun removeFromShelf() {
         viewModelScope.launch { shelfRepo.remove(workId) }
     }

@@ -6,7 +6,7 @@ An offline-first Android app for finding books and keeping a personal reading sh
 
 Shelfie is a portfolio project. It has few features on purpose: each one exists to show a design decision that I can explain, such as how the cache stays correct, how errors reach the UI, and how modules are kept apart.
 
-> **Status:** early. Search and book detail work end to end. The shelf has its data layer and tests but no screen yet. See [Roadmap](#roadmap).
+> **Status:** early. Search, book detail and the shelf work end to end. See [Roadmap](#roadmap).
 
 ## Features
 
@@ -18,7 +18,12 @@ Shelfie is a portfolio project. It has few features on purpose: each one exists 
 **Book detail**
 - Cached details appear immediately and are refreshed in the background (stale-while-revalidate).
 - A failed refresh keeps the book on screen and shows an error banner.
-- Books can be added to the shelf as *Want to read*, *Reading* or *Finished*. The shelf is stored only on the device, so this works offline.
+- Books can be added to the shelf as *Want to read*, *Reading* or *Finished*.
+- Reading progress is set with a slider. Status follows progress: moving a want-to-read book past 0% starts it, and reaching 100% finishes it.
+
+**Shelf**
+- Lists shelved books with their status and progress, filterable by status.
+- The shelf is stored only on the device, so everything on it works offline.
 
 ## Architecture
 
@@ -123,7 +128,8 @@ The project uses fakes instead of mocking libraries, so tests check the state th
 - [x] Multi-module build with convention plugins and enforced module rules
 - [x] Offline-first data layer
 - [x] Search and book detail
-- [ ] Shelf screen with progress and notes, and periodic metadata refresh with WorkManager
+- [x] Shelf screen and reading progress
+- [ ] Notes, and periodic metadata refresh with WorkManager
 - [ ] Discover screen, adaptive multi-pane layouts, Baseline Profile and Macrobenchmark
 - [ ] Kotlin Multiplatform: shared data layer and an iOS app
 - [ ] On-device AI reading summaries with a cloud fallback

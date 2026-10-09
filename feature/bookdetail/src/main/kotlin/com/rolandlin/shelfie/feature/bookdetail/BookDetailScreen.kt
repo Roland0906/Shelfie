@@ -19,11 +19,15 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -33,6 +37,7 @@ import com.rolandlin.shelfie.core.designsystem.component.CoverSize
 import com.rolandlin.shelfie.core.designsystem.component.LoadingState
 import com.rolandlin.shelfie.core.designsystem.component.MessageState
 import com.rolandlin.shelfie.core.designsystem.component.StatusBanner
+import com.rolandlin.shelfie.core.designsystem.component.label
 import com.rolandlin.shelfie.core.designsystem.component.message
 import com.rolandlin.shelfie.core.model.Book
 import com.rolandlin.shelfie.core.model.ShelfEntry
@@ -40,6 +45,7 @@ import com.rolandlin.shelfie.core.model.ShelfStatus
 import com.rolandlin.shelfie.core.model.WorkId
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
+import kotlin.math.roundToInt
 
 /** The feature's only public entry point; navigation is passed in as callbacks. */
 @Composable
@@ -56,6 +62,7 @@ fun BookDetailRoute(
         onRefresh = viewModel::refresh,
         onStatusSelected = viewModel::setShelfStatus,
         onRemoveFromShelf = viewModel::removeFromShelf,
+        onProgressChange = viewModel::setProgress,
         modifier = modifier,
     )
 }
@@ -68,6 +75,7 @@ internal fun BookDetailScreen(
     onRefresh: () -> Unit,
     onStatusSelected: (ShelfStatus) -> Unit,
     onRemoveFromShelf: () -> Unit,
+    onProgressChange: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
@@ -108,7 +116,7 @@ internal fun BookDetailScreen(
                         onAction = onRefresh,
                     )
                 }
-                BookContent(uiState.book, uiState.shelfEntry, onStatusSelected, onRemoveFromShelf)
+                BookContent(uiState.book, uiState.shelfEntry, onStatusSelected, onRemoveFromShelf, onProgressChange)
             }
         }
     }
@@ -120,6 +128,7 @@ private fun BookContent(
     shelfEntry: ShelfEntry?,
     onStatusSelected: (ShelfStatus) -> Unit,
     onRemoveFromShelf: () -> Unit,
+    onProgressChange: (Int) -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -141,7 +150,7 @@ private fun BookContent(
             }
         }
 
-        ShelfSection(shelfEntry, onStatusSelected, onRemoveFromShelf)
+        ShelfSection(shelfEntry, onStatusSelected, onRemoveFromShelf, onProgressChange)
 
         Text(
             text = book.description ?: stringResource(R.string.detail_no_description),
@@ -162,6 +171,7 @@ private fun ShelfSection(
     shelfEntry: ShelfEntry?,
     onStatusSelected: (ShelfStatus) -> Unit,
     onRemoveFromShelf: () -> Unit,
+    onProgressChange: (Int) -> Unit,
 ) {
     Column {
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -169,19 +179,40 @@ private fun ShelfSection(
                 FilterChip(
                     selected = shelfEntry?.status == status,
                     onClick = { onStatusSelected(status) },
-                    label = { Text(stringResource(status.labelRes)) },
+                    label = { Text(status.label()) },
                 )
             }
         }
         if (shelfEntry != null) {
+            ProgressSlider(shelfEntry.progressPercent, onProgressChange)
             TextButton(onClick = onRemoveFromShelf) { Text(stringResource(R.string.detail_remove_from_shelf)) }
         }
     }
 }
 
-private val ShelfStatus.labelRes: Int
-    get() = when (this) {
-        ShelfStatus.WantToRead -> R.string.shelf_status_want_to_read
-        ShelfStatus.Reading -> R.string.shelf_status_reading
-        ShelfStatus.Finished -> R.string.shelf_status_finished
+/**
+ * Follows the finger locally and saves only on release, so a drag is one database write.
+ * The saved value can differ from the dragged one: ShelfEntry may change the status too.
+ */
+@Composable
+private fun ProgressSlider(savedPercent: Int, onProgressChange: (Int) -> Unit) {
+    var dragPercent by remember { mutableStateOf<Int?>(null) }
+    val shownPercent = dragPercent ?: savedPercent
+    Column {
+        Text(
+            stringResource(R.string.detail_progress, shownPercent),
+            style = MaterialTheme.typography.labelLarge,
+        )
+        Slider(
+            value = shownPercent.toFloat(),
+            onValueChange = { dragPercent = it.roundToInt() },
+            onValueChangeFinished = {
+                dragPercent?.let(onProgressChange)
+                dragPercent = null
+            },
+            valueRange = 0f..100f,
+            // 5% steps: fine enough for a book, coarse enough to hit 100 easily
+            steps = 19,
+        )
     }
+}

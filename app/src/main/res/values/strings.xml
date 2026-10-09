@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Shelfie</string>
+    <string name="nav_search">Search</string>
+    <string name="nav_shelf">Shelf</string>
 </resources>
