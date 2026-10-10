@@ -9,3 +9,4 @@ One short record per decision: what was chosen, why, and what it costs.
 5. [Fakes over mocks](0005-fakes-over-mocks.md)
 6. [Local shelf](0006-local-shelf.md)
 7. [Shelf sync](0007-shelf-sync.md)
+8. [Server in the same repository](0008-server-in-repo.md)
