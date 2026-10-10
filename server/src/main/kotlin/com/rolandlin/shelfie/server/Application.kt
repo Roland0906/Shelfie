@@ -1,5 +1,6 @@
 package com.rolandlin.shelfie.server
 
+import com.rolandlin.shelfie.core.contract.ContractJson
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
@@ -20,7 +21,7 @@ fun main() {
 
 /** Kept apart from [main] so tests can run the same setup in memory with `testApplication`. */
 fun Application.module() {
-    install(ContentNegotiation) { json() }
+    install(ContentNegotiation) { json(ContractJson) }
     install(CallLogging)
 
     routing {
