@@ -25,9 +25,10 @@ jobs:
 
       - uses: gradle/actions/setup-gradle@v6
 
-      # Configuration also enforces the module dependency rules, so a violation fails here
+      # Configuration also enforces the module dependency rules, so a violation fails here.
+      # Plain JVM modules have no testDebugUnitTest task, so their tests are listed separately.
       - name: Build and run unit tests
-        run: ./gradlew assembleDebug testDebugUnitTest
+        run: ./gradlew assembleDebug testDebugUnitTest :core:model:test :core:common:test :core:network:test
 
       - name: Upload test reports
         if: failure()
