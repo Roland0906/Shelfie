@@ -35,3 +35,27 @@ jobs:
         with:
           name: test-reports
           path: '**/build/reports/tests/'
+
+  server:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - uses: gradle/actions/setup-gradle@v6
+
+      # The fat JAR is what the Docker image will copy in (see ADR 0008)
+      - name: Test and package the server
+        run: ./gradlew :server:test :server:buildFatJar
+
+      - name: Upload test reports
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: server-test-reports
+          path: server/build/reports/tests/

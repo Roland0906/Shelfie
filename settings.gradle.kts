@@ -38,3 +38,5 @@ include(":core:testing")
 include(":feature:search")
 include(":feature:bookdetail")
 include(":feature:shelf")
+
+include(":server")
