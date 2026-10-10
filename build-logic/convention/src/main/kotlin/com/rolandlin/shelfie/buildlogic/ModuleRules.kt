@@ -39,7 +39,7 @@ private val RULES = listOf(
     Rule(
         from = Regex("^:server$"),
         forbidden = Regex("^:(app|feature:.+|core:(network|database|datastore|data|designsystem|testing))$"),
-        reason = "the server shares only pure Kotlin code (:core:model, :core:common) with the app",
+        reason = "the server shares only pure Kotlin code (:core:model, :core:common, :core:contract) with the app",
     ),
     Rule(
         from = Regex("^:(app|feature:.+|core:.+)$"),

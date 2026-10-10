@@ -34,6 +34,7 @@ include(":core:database")
 include(":core:data")
 include(":core:designsystem")
 include(":core:testing")
+include(":core:contract")
 
 include(":feature:search")
 include(":feature:bookdetail")
