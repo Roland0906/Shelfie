@@ -51,11 +51,11 @@ jobs:
 
       # The fat JAR is what the Docker image will copy in (see ADR 0008)
       - name: Test and package the server
-        run: ./gradlew :server:test :server:buildFatJar
+        run: ./gradlew :core:contract:test :server:test :server:buildFatJar
 
       - name: Upload test reports
         if: failure()
         uses: actions/upload-artifact@v7
         with:
           name: server-test-reports
-          path: server/build/reports/tests/
+          path: '**/build/reports/tests/'
