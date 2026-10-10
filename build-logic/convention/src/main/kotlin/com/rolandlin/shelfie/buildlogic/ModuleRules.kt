@@ -36,6 +36,16 @@ private val RULES = listOf(
         forbidden = Regex("^:(feature:.+|app)$"),
         reason = "core modules must not depend on features or the app",
     ),
+    Rule(
+        from = Regex("^:server$"),
+        forbidden = Regex("^:(app|feature:.+|core:(network|database|datastore|data|designsystem|testing))$"),
+        reason = "the server shares only pure Kotlin code (:core:model, :core:common) with the app",
+    ),
+    Rule(
+        from = Regex("^:(app|feature:.+|core:.+)$"),
+        forbidden = Regex("^:server$"),
+        reason = "the app talks to the server over HTTP, never through its code",
+    ),
 )
 
 internal fun Project.enforceModuleRules() {
